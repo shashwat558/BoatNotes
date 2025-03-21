@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/themeProvider";
+import NavBar from "@/components/NavBar";
 
+const spaceMono = Space_Mono({
+  weight: "400",
+  subsets: ["latin"]
+})
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,11 +29,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${spaceMono.className} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange 
+        >
+          <div className="flex flex-col min-h-screen w-full">
+            <NavBar />
+            <main className="flex flex-1 flex-col px-8 py-8 pt-10 ">{children}</main>
+
+          </div>
+          
+        </ThemeProvider>
+        
       </body>
     </html>
   );
