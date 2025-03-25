@@ -4,6 +4,7 @@ import React from 'react'
 import { Button } from './ui/button'
 import { ModeToggle } from './ModeChangingMenu'
 import { getUser } from '@/lib/utils/supabase/server'
+import LogoutButton from './LogoutButton'
 
 const NavBar = async () => {
   const user = await getUser();
@@ -18,15 +19,14 @@ const NavBar = async () => {
 
         <div className='flex items-center justify-center gap-5'>
             <ModeToggle />
-            <Button asChild variant={"outline"} className='cursor-pointer'>
-                <Link href={"/signin"}>Login</Link>
-            </Button>
-            <Button variant={"outline"} className='cursor-pointer sm:block hidden'>
-                <Link href={"/signup"}>
-                  Signup
+            {user ? (<LogoutButton />) : (<><Button asChild variant={"outline"} className='cursor-pointer'>
+          <Link href={"/signin"}>Login</Link>
+        </Button><Button variant={"outline"} className='cursor-pointer sm:block hidden'>
+            <Link href={"/signup"}>
+              Signup
 
-               </Link>
-            </Button>
+            </Link>
+          </Button></>)}
             
         </div>
         

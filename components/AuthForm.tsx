@@ -43,8 +43,8 @@ const AuthForm = ({type}: props) => {
           const signupResult = await signupAction(email, password);
           errorMessage = signupResult?.errorMessage;
           
-          title = "signed Up in";
-          description = "You have succesfully Signed Up in";
+          title = "Signed up succesfully";
+          description = "You have succesfully Signed Up now check your email";
         }
 
         if(!errorMessage){

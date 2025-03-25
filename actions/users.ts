@@ -64,3 +64,14 @@ export const signupAction = async (email:string, password: string ) => {
     }
 
 }
+
+
+export const logoutActions = async () => {
+    const client = await createClient();
+    const {error} = await client.auth.signOut();
+    if(error){
+        throw new Error
+    }
+
+    return {ErrorMessage: null}
+}
