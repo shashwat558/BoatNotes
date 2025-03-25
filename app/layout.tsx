@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/themeProvider";
 import NavBar from "@/components/NavBar";
+import { Toaster } from "@/components/ui/sonner";
 
 const spaceMono = Space_Mono({
   weight: "400",
@@ -42,6 +43,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen w-full">
             <NavBar />
             <main className="flex flex-1 flex-col px-8 py-8 pt-10 ">{children}</main>
+            <Toaster position="top-right"/>
 
           </div>
           

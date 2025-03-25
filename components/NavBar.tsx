@@ -3,8 +3,11 @@ import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
 import { ModeToggle } from './ModeChangingMenu'
+import { getUser } from '@/lib/utils/supabase/server'
 
-const NavBar = () => {
+const NavBar = async () => {
+  const user = await getUser();
+  console.log(user)
   return (
     <header className='relative h-24 w-screen flex item-center justify-between bg-popover px-3 sm:px-8 py-2 shadow-xl border-b-2 border-0 shadow-gray-800' >
         <Link href={"/"} className='flex items-center justify-center gap-3'>
