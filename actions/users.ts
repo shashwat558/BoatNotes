@@ -1,5 +1,6 @@
 "use server"
 
+import { prisma } from "@/lib/prisma"
 import { handleError } from "@/lib/utils"
 import { createClient } from "@/lib/utils/supabase/server"
 
@@ -28,19 +29,19 @@ export const loginAction = async (email:string, password: string ) => {
 }
 
 export const signupAction = async (email:string, password: string ) => {
-    console.log(email, password , "fldkfsdl")
+    
 
     try {
         const client = await createClient();
-        console.log(client)
+        
         const auth = client.auth
-        console.log("reached here")
+        
         const response= await auth.signUp({
             email, 
             password
         })
 
-        console.log("here also")
+        
         
         if(response.error){
             
@@ -50,6 +51,13 @@ export const signupAction = async (email:string, password: string ) => {
 
         const user = response.data.user;
         const userId = user?.id;
+
+        await prisma.user.create({
+            data: {
+                id: userId,
+                email: email
+            }
+        })
 
         if(!userId) throw new Error("Error signin up");
 

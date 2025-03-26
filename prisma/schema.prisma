@@ -16,5 +16,15 @@ datasource db {
 model User {
   id        String @id  @unique @default(uuid())
   email     String @unique
-  password  String 
+
+  notes     Note[]
+}
+
+model Note {
+  id          String  @id @default(cuid())
+  text        String
+  authorId    String
+  author      User @relation(fields: [authorId], references: [id])
+  publishedAt DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
 }
